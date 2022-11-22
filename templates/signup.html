@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Signup</title>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+	<body>
+		<div class="register">
+			<br/>
+			<a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='favicon.ico') }}" class="center" title="Click to return to Home"></a>
+			<br/>
+			<div class="links">
+				<a href="{{ url_for('login') }}">Login</a>
+				<a href="{{ url_for('signup') }}" class="active">Signup</a>
+			</div>
+			<form action="{{ url_for('signup') }}" method="post" autocomplete="off">
+				<label for="fullname">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="fullname" placeholder="Enter Fullname" id="fullname" required>
+
+				<label for="school">
+					<i class="fas fa-school"></i>
+				</label>
+				<input type="text" name="school" placeholder="Enter Alma Mater" id="school" required>
+
+				<label for="year">
+					<i class="fas fa-graduation-cap"></i>
+				</label>
+				<input type="text" name="year" placeholder="Enter Completion Year" id="year" required>
+
+				<label for="number">
+					<i class="fas fa-phone"></i>
+				</label>
+				<input type="text" name="number" placeholder="Enter Mobile Number" id="number" required>
+
+				<label for="email">
+					<i class="fas fa-envelope"></i>
+				</label>
+				<input type="email" name="email" placeholder="Enter email" id="email" required>
+
+				<label for="occupation">
+					<i class="fas fa-user-tie"></i>
+				</label>
+				<input type="text" name="occupation" placeholder="Enter Occupation" id="occupation" required>
+
+				<label for="organisation">
+					<i class="fas fa-building"></i>
+				</label>
+				<input type="text" name="organisation" placeholder="Enter Organisation" id="organisation" required>
+
+				<!--Image Upload Here-->
+
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Enter Password" id="password" required>
+
+				<label for="email">
+					<i class="fas fa-lock"></i>
+				</label>				
+				<input type="password" name="passwordc" placeholder="Confirm Password" id="passwordc" required>
+				
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Signup">
+			</form>
+		</div>
+	</body>
+	<script src="../static/js/display_pic.js"></script>
+</html>
