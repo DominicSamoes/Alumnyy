@@ -12,8 +12,7 @@
 
 ---
 
-# Tasks
-
+# How to use the Alumnyy Web App
 
 
 
