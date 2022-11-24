@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<form method="POST" autocomplete="off">
+
+    <h3 align="center">Signup</h3>
+
+    <div class="form-group">
+          <label for="fullname"><i class="fas fa-user"></i> Fullname</label>
+          <input 
+               type="text" 
+               id="fullname" 
+               class="form-control" 
+               name="fullname"
+               placeholder="Enter fullname"
+          />
+    </div>
+    <div class="form-group">
+          <label for="school"><i class="fas fa-school"></i> School</label>
+          <input 
+               type="text" 
+               id="school" 
+               class="form-control"  
+               name="school"
+               placeholder="Enter alma mater"
+          />
+    </div>    
+    <div class="form-group">
+          <label for="programme"><i class="fas fa-graduation-cap"></i> Programme</label>
+          <input 
+               type="text" 
+               id="programme" 
+               class="form-control" 
+               name="programme"
+               placeholder="Enter programme"
+          />
+    </div>  
+    <div class="form-group">
+         <label for="number"><i class="fas fa-phone"></i> Mobile Number</label>
+         <input 
+               type="text" 
+               id="number"  
+               class="form-control" 
+               name="number" 
+               placeholder="Enter mobile number" 
+          />
+    </div>       
+    <div class="form-group">
+         <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+         <input 
+               type="email" 
+               id="email" 
+               class="form-control" 
+               id="email"
+               name="email" 
+               placeholder="Enter email address" 
+          />
+    </div>
+    <div class="form-group">
+        <label for="occupation"><i class="fas fa-briefcase"></i> Occupation</label>
+        <input 
+               type="text" 
+               id="occupation" 
+               class="form-control" 
+               name="occupation" 
+               placeholder="Enter occupation" 
+        />
+   </div>
+   <div class="form-group">
+        <label for="organisation"><i class="fas fa-building"></i> Organisation</label>
+        <input 
+               type="text" 
+               id="organisation" 
+               class="form-control" 
+               name="organisation" 
+               placeholder="Enter organisation"  
+        />
+   </div>
+   <div class="field image">
+          <span class="img-div">
+               <div class="text-center img-placeholder" onClick="triggerClick()">
+                    <h4>Click to upload profile picture</h4>
+               </div>
+                    <img src="{{ url_for('static', filename='assets/default.png') }}" width="40%" align="center" onClick="triggerClick()" id="profileDisplay">
+          </span>
+                    <input type="file" name="avatar" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">			
+   </div>   
+   <div class="form-group">
+        <label for="password1"><i class="fas fa-lock"></i> Password</label>
+        <input 
+               type="password" 
+               id="password1" 
+               class="form-control" 
+               name="password1"
+               placeholder="Enter your password" 
+          />
+   </div>
+   <div class="form-group">
+        <label for="password2"><i class="fas fa-lock"></i> Confirm Password</label>
+        <input 
+               type="password" 
+               id="password2" 
+               class="form-control" 
+               name="password2"
+               placeholder="Confirm password" 
+          />
+   </div>
+
+   <br/>
+
+   <button type="submit" class="btn btn-primary">SIGNUP</button>
+
+</form>
+
+{% endblock %}
