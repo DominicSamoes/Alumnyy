@@ -38,12 +38,22 @@
           />
     </div>  
     <div class="form-group">
-         <label for="number"><i class="fas fa-phone"></i> Mobile Number</label>
+          <label for="year"><i class="fas fa-graduation-cap"></i> Year</label>
+          <input 
+               type="text" 
+               id="year" 
+               class="form-control" 
+               name="year"
+               placeholder="Enter completion year"
+          />
+    </div>  
+    <div class="form-group">
+         <label for="mobilenumber"><i class="fas fa-phone"></i> Mobile Number</label>
          <input 
                type="text" 
-               id="number"  
+               id="mobilenumber"  
                class="form-control" 
-               name="number" 
+               name="mobilenumber" 
                placeholder="Enter mobile number" 
           />
     </div>       
@@ -78,15 +88,15 @@
                placeholder="Enter organisation"  
         />
    </div>
-   <div class="field image">
+   <!--<div class="field image">
           <span class="img-div">
                <div class="text-center img-placeholder" onClick="triggerClick()">
                     <h4>Click to upload profile picture</h4>
                </div>
                     <img src="{{ url_for('static', filename='assets/default.png') }}" width="40%" align="center" onClick="triggerClick()" id="profileDisplay">
           </span>
-                    <input type="file" name="avatar" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">			
-   </div>   
+                    <input type="file" name="avatar" onChange="displayImage(this)" id="avatar" class="form-control" style="display: none;">			
+   </div>-->  
    <div class="form-group">
         <label for="password1"><i class="fas fa-lock"></i> Password</label>
         <input 
@@ -111,6 +121,8 @@
    <br/>
 
    <button type="submit" class="btn btn-primary">SIGNUP</button>
+
+   <br/>
 
 </form>
 
