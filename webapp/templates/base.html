@@ -27,9 +27,11 @@
                         <a class="nav-item nav-link" id="home" href="/">Alumnyy</a>
                         {% if current_user.is_authenticated  %}
                             <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>
+                            <a class="nav-item nav-link" id="posts" href="/posts"><i class="fas fa-plus"></i> Posts</a>
+                            <a class="nav-item nav-link" id="connections" href="/connections"><i class="fas fa-handshake"></i> Connections</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
                             <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
-                            <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> {{ user }} </a>
+                            <a class="nav-item nav-link" id="logout" href="/"><i class="fas fa-user"></i> {{ current_user.fullname }} </a>
                         {% else %}
                             <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
