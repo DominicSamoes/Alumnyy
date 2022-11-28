@@ -10,7 +10,7 @@ def index():
 @views.route('/home')
 @login_required 
 def home():
-    return render_template("home.html", User=current_user)
+    return render_template("home.html", alumnus=current_user)
 
 @views.route('/about')
 def about():

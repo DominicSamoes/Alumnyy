@@ -25,16 +25,11 @@
                 <div class="navbar-collapse collapse" id="navbar">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link" id="home" href="/">Alumnyy</a>
-                        {% if User.is_authenticated  %}
                             <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
                             <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
-                        {% else %}
-                            <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>
-                            <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
                             <a class="nav-item nav-link" id="login" href="/login"><i class="fas fa-user"></i> Login</a>
                             <a class="nav-item nav-link" id="signup" href="/signup"><i class="fas fa-user-plus"></i> Signup</a>                      
-                        {% endif %}
                     </div>
                 </div>
             </nav>
