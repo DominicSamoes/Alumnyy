@@ -16,7 +16,7 @@ def login():
         if User:
             if check_password_hash(User.password, password):
                 flash('Logged in successfully.', category='success')
-                #login_user(User, remember=True)
+                login_user(User, remember=True)
 
                 return  redirect(url_for('views.home'))
             else:
@@ -24,7 +24,7 @@ def login():
         else:
             flash('User with that email does not exist!', category='error')
 
-    return render_template("login.html", alumnus=current_user)
+    return render_template("login.html", user=current_user)
 
 @auth.route('/signup', methods=['POST', 'GET'] )
 def signup():
@@ -62,7 +62,9 @@ def signup():
         elif len(occupation) < 3:
             flash('Occupation must be longer than 3 characters!', category='error')  
         elif len(organisation) < 3:
-            flash('Organisation must be longer than 3 characters!', category='error')                                         
+            flash('Organisation must be longer than 3 characters!', category='error')  
+        elif len(country) < 3:
+            flash('Country must be longer than 3 characters!', category='error')                                              
         elif password1 != password2:
             flash('Passwords don\'t match!', category='error')
         elif len(password1) < 7:
@@ -75,13 +77,14 @@ def signup():
             db.session.commit()
 
             flash('Account created!', category='success')
-            #login_user(User, remember=True)  
+            login_user(newuser, remember=True)  
 
             return  redirect(url_for('views.home'))
 
-    return render_template("signup.html", alumnus=current_user)
+    return render_template("signup.html", user=current_user)
 
 @auth.route('/logout')
 @login_required
 def logout():
+    logout_user()
     return redirect(url_for('auth.login'))
