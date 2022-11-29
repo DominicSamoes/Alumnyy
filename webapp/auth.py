@@ -1,9 +1,7 @@
-import os
-from flask import Blueprint, Flask, render_template, request, flash, redirect, url_for 
+from flask import Blueprint, render_template, request, flash, redirect, url_for 
 from .models import user, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
-from werkzeug.utils import secure_filename
 
 auth = Blueprint('auth', __name__)
 
