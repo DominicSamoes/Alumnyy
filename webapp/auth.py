@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for 
+import os
+from flask import Blueprint, Flask, render_template, request, flash, redirect, url_for 
 from .models import user, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.utils import secure_filename
 
 auth = Blueprint('auth', __name__)
 
@@ -29,6 +31,7 @@ def login():
 @auth.route('/signup', methods=['POST', 'GET'] )
 def signup():
     if request.method == 'POST':
+
         email = request.form.get('email')
         fullname = request.form.get('fullname')
         country = request.form.get('country')
@@ -38,7 +41,7 @@ def signup():
         mobilenumber = request.form.get('mobilenumber')
         occupation = request.form.get('occupation')
         organisation = request.form.get('organisation')
-        #avatar = request.form.get('avatar')
+        
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
   
@@ -71,7 +74,7 @@ def signup():
             flash('Password must be longer than 7 characters!', category='error')
         else:
             newuser = user(fullname=fullname, country=country, school=school, programme=programme, mobilenumber=mobilenumber,
-                email=email, occupation=occupation, organisation=organisation, year=year, password=generate_password_hash(password1, method='sha256'))
+                    email=email, occupation=occupation, organisation=organisation, year=year, password=generate_password_hash(password1, method='sha256'))
 
             db.session.add(newuser)
             db.session.commit()

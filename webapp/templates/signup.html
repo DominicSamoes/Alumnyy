@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Signup{% endblock %}
-
 {% block content %}
 
-<form method="POST" autocomplete="off">
+<div class="register">
+<form method="POST" enctype="multipart/form-data" autocomplete="off">
 
     <h3 align="center">Signup</h3>
 
@@ -98,15 +98,13 @@
                placeholder="Enter country"  
         />
    </div>
-   <!--<div class="field image">
-          <span class="img-div">
-               <div class="text-center img-placeholder" onClick="triggerClick()">
-                    <h4>Click to upload profile picture</h4>
-               </div>
-                    <img src="{{ url_for('static', filename='assets/default.png') }}" width="40%" align="center" onClick="triggerClick()" id="profileDisplay">
-          </span>
-                    <input type="file" name="avatar" onChange="displayImage(this)" id="avatar" class="form-control" style="display: none;">			
-   </div>-->  
+   <div class="form-group">
+     <label for="avatar"><i class="fas fa-camera"></i> Upload a Profile Picture</label>
+     <input 
+            type="file" 
+            name="avatar"
+       >
+</div>
    <div class="form-group">
         <label for="password1"><i class="fas fa-lock"></i> Password</label>
         <input 
@@ -133,7 +131,9 @@
    <button type="submit" class="btn btn-primary">SIGNUP</button>
 
    <br/>
+   <br>
 
 </form>
+</div>
 
 {% endblock %}

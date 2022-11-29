@@ -30,8 +30,8 @@
                             <a class="nav-item nav-link" id="posts" href="/posts"><i class="fas fa-plus"></i> Posts</a>
                             <a class="nav-item nav-link" id="connections" href="/connections"><i class="fas fa-handshake"></i> Connections</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
-                            <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
                             <a class="nav-item nav-link" id="logout" href="/"><i class="fas fa-user"></i> {{ current_user.fullname }} </a>
+                            <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
                         {% else %}
                             <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
@@ -99,11 +99,6 @@
         src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
-    ></script>
-
-    <script 
-        type="text/javascript"
-        src="{{ url_for('static',  filename='js/display_pic.js') }}"
     ></script>
 
 </html>
