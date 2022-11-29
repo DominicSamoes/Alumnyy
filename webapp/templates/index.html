@@ -5,6 +5,34 @@
 
 <h2>Alumnyy the ideal platform to connect with fellow alumni from one's alma mater!!</h2>
 
+<hr>
+
 <h4>Connect with fellow alumni</h4>
+
+  <div class="content">
+        {% for alumnus in alumni %}
+        <div class="alumnus">
+            <b>
+                    {% if alumnus.avatar == None %}
+                    <p class="name">
+                        <img src="{{ url_for('static', filename='assets/default.png') }}" style="max-width: 100px">
+                        {{ alumnus.fullname }}
+                    </p>
+                    {% else %}
+                    <p class="name">
+                        <img src="{{ alumnus.avatar }}" style="max-width: 100px">
+                        {{ alumnus.fullname }}
+                    </p>                    
+                    {% endif %}
+
+            </b>
+            <p><i class="fas fa-school"></i> {{ alumnus.school }}</p>
+            <p><i class="fas fa-book-reader"></i> {{ alumnus.programme }}</p>
+            <p><i class="fas fa-user-graduate"></i> {{ alumnus.year }}</p>
+        </div>
+        {% endfor %}
+  </div>
+
+  <br>
 
 {% endblock %}
