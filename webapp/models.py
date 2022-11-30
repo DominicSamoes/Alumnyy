@@ -37,3 +37,15 @@ class user(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User %r>' % self.email
+
+class school(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), unique=True)
+    logo = db.Column(db.String(255))
+
+    def __init__(self, name, logo):
+        self.name = name
+        self.logo = logo
+
+    def __repr__(self):
+        return '<School %r>' % self.name

@@ -35,6 +35,33 @@
         {% endfor %}
   </div>
 
+  <hr>
+  <h4>Alma mater</h4>
+
+  <div class="content">
+    {% for school in schools %}
+    <div class="alumnus">
+        <b>
+                {% if school.school == None %}
+                <p> Alma Mater will appear here</p>
+                {% else %}
+                <p class="name">
+                    {{ school.school }}
+                </p>                    
+                {% endif %}
+
+        </b>
+    </div>
+    {% endfor %}
+</div>
+
+  <br>
+
+  <hr>
+  <h4>Designed for Intelectuals</h4>
+
+  <p>For more information related to the platform  click <a href="/about">here</a>.</p>
+
   <br>
 
 {% endblock %}

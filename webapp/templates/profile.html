@@ -1,25 +1,24 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
 
-<h2>Alumnyy the ideal platform to connect with fellow alumni from one's alma mater!!</h2>
+<br>
 
-<hr>
-
-<h4>Connect with fellow alumni from {{  current_user.school }}</h4>
+<h4>{{  current_user.school }} fellow Alumnus</h4>
 
   <div class="content">
-
-        {% for alumnus in alumni %}
-           {% if alumnus.school == current_user.school and alumnus.id != current_user.id %}
+        
+        {% for alumnus in alumnus %}
+           {% if alumnus.id == 2  %}
                 <div class="alumnus">
                     <b>
+                        <a href=""><p><i class="fas fa-user-plus"></i> Connect</p></a>
                             {% if alumnus.avatar == None %}
                             <p class="name">
                                 <a href="/profile?id={{ alumnus.id }}">
-                                    <img src="{{ url_for('static', filename='assets/default.png') }}"
-                                     class="rounded-circle" width="200" height="136">
+                                    <img src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"
+                                     width="200" height="136">
                                 </a>
                                 <br>
                                 <a href="/profile?id={{ alumnus.id }}">{{ alumnus.fullname }}</a>
@@ -38,6 +37,15 @@
                     <p><i class="fas fa-school"></i> {{ alumnus.school }}</p>
                     <p><i class="fas fa-book-reader"></i> {{ alumnus.programme }}</p>
                     <p><i class="fas fa-user-graduate"></i> {{ alumnus.year }}</p>
+                    <p><i class="fas fa-briefcase"></i> {{ alumnus.occupation }}</p>
+                    <p><i class="fas fa-building"></i> {{ alumnus.organisation }}</p>
+                    <p><i class="fas fa-flag"></i> {{ alumnus.country }}</p>
+
+                    {% if alumnus.bio != None %}
+                    <p><i class="fas fa-book"></i> Biography</p>
+                    <p>{{ alumnus.bio }}</p>
+                    {% endif %}
+
                 </div>
             {% endif %}
         {% endfor %}
