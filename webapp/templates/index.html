@@ -15,12 +15,14 @@
             <b>
                     {% if alumnus.avatar == None %}
                     <p class="name">
-                        <img src="{{ url_for('static', filename='assets/default.png') }}" style="max-width: 100px">
+                        <img src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle" width="200" height="136">
+                        <br>
                         {{ alumnus.fullname }}
                     </p>
                     {% else %}
                     <p class="name">
-                        <img src="{{ alumnus.avatar }}" style="max-width: 100px">
+                        <img src="{{ alumnus.avatar }}" class="rounded-circle" width="200" height="136">
+                        <br>
                         {{ alumnus.fullname }}
                     </p>                    
                     {% endif %}
