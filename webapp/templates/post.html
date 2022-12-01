@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Post{% endblock %}
+
+{% block content %}
+
+<br>
+
+<h4><i class="fas fa-school"></i> Whatever you post, will be visible to {{  current_user.school }} alumni</h4>
+<p><i class="fas fa-user-graduate"></i> Posts including images will be coming soon</p>
+<p><i class="fas fa-user-graduate"></i> Remember that as an intellectual, your post(s) should show that you engage in
+    critical thinking, research, and reflection about the reality of society, and proposes solutions for 
+    the normative problems of society</p>
+
+<form method="post">
+    <textarea name="text" id="text" class="form-control"></textarea>
+    <br>
+    <div align="center">
+            <button type="submit" class="btn btn-primary">Post</button>
+    </div>
+</form>
+
+<br>
+
+<ul class="list-group list-group-flush" id="text">
+    {% for post in current_user.post %}
+        <li class="list-group-item"> <i class="fas fa-calendar"></i> {{ post.date.ctime() }}: <br> {{ post.text }}
+            <button type="button" class="close" onClick="deletePost({{ post.id }})">
+                <i class="fas fa-trash" title="Delete"></i>
+            </button>
+        </li>
+        <br>
+    {% endfor %}
+</ul>
+
+  <br>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+
+<br>
+
+<h4>Posts</h4>
+
+<a class="btn btn-primary" href="/post"><i class="fas fa-plus"></i> Post Something</button></a>
+
+  <div class="content">
+        
+    <ul class="list-group list-group-flush" id="text">
+        {% for post in posts %}
+                <br> 
+                <li class="list-group-item alumnus"> 
+                        {% if post.userid == current_user.id %}
+                            {% if current_user.avatar == None %}
+                                  <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"> You
+                            {% else %}
+                                  <img src="{{ current_user.avatar }}" 
+                            class="rounded-circle" width="40" height="33"> You
+                            {% endif %}
+                        {% else %}
+                            {% if alumni.avatar == None and post.userid == alumni.id %}
+                                  <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"> You
+                            {% else %}
+                                  <img src="{{ alumni.avatar }}" 
+                            class="rounded-circle" width="40" height="33"> You
+                            {% endif %}                            
+                        {% endif %}
+                        <br><br>
+                        {{ post.text }}
+                        <br><br>
+                        <i class="fas fa-calendar"></i> {{ post.date.ctime() }}
+                    <br> 
+                </li>
+                <br>
+        {% endfor %}
+    </ul>
+    
+
+  </div>
+
+  <br>
+{% endblock %}

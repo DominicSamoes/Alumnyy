@@ -18,6 +18,7 @@ class user(db.Model, UserMixin):
     year = db.Column(db.Integer)
     bio = db.Column(db.String(800), )
     password = db.Column(db.String(255))
+    post = db.relationship('post', backref='post')
 
     def __init__(self, fullname, country, school, programme, mobilenumber, 
                         email, occupation, organisation, year, password):
@@ -49,3 +50,9 @@ class school(db.Model):
 
     def __repr__(self):
         return '<School %r>' % self.name
+
+class post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    text = db.Column(db.String(10000))
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
