@@ -36,6 +36,7 @@ def profile():
 @views.route('/request_connection', methods=['GET'])
 @login_required
 def requestconnection():
+    """Writes connection to connect table and redirects to connection page"""
     id = request.args.get('id')
     connreq = Connect(initid=current_user.id, recid=id)
     db.session.add(connreq)
@@ -54,7 +55,9 @@ def connectprofile():
 @views.route('/connections')
 @login_required
 def connections():
-    return render_template('connections.html')
+    """Returns pending requests and approved connection requests"""
+    requested_connections = db.session.execute('SELECT * FROM connect INNER JOIN user ON connect.initid = :val', {'val': current_user.id})
+    return render_template('connections.html', requested_connections = requested_connections)
 
 @views.route('/posts')
 @login_required 
