@@ -5,14 +5,12 @@
 
 <br>
 
-<h4>{{  current_user.school }} fellow Alumnus</h4>
+<h4>Connection</h4>
 
   <div class="content">
-        
-        {% for alumnus in alumnus %}
                 <div class="alumnus">
                     <b>
-                        <a href="/request_connection?id={{ alumnus.id }}"><p><i class="fas fa-user-plus"></i> Connect</p></a>
+                        <p><i class="fas fa-user-plus"></i> Connected</p>
                             {% if alumnus.avatar == None %}
                             <p class="name">
                                     <img src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"
@@ -35,15 +33,14 @@
                     <p><i class="fas fa-briefcase"></i> {{ alumnus.occupation }}</p>
                     <p><i class="fas fa-building"></i> {{ alumnus.organisation }}</p>
                     <p><i class="fas fa-flag"></i> {{ alumnus.country }}</p>
-
+                    <p><i class="fas fa-envelope"></i> {{ alumnus.email }}</p>
+                    <p><i class="fas fa-message"></i></p>
                     {% if alumnus.bio != None %}
                     <p><i class="fas fa-book"></i> Biography</p>
                     <p>{{ alumnus.bio }}</p>
                     {% endif %}
 
                 </div>
-        {% endfor %}
-
   </div>
 
   <br>

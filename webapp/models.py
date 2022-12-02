@@ -56,3 +56,14 @@ class post(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     text = db.Column(db.String(10000))
     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class connect(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    initid = db.Column(db.Integer, db.ForeignKey('user.id'))
+    recid = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class connection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    connecta = db.Column(db.Integer, db.ForeignKey('user.id'))
+    connectb = db.Column(db.Integer, db.ForeignKey('user.id'))

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Connections{% endblock %}
+
+{% block content %}
+
+<br>
+
+<h4><i class="fas fa-user-plus"></i> Pending Request(s)</h4>
+
+  <div class="content">
+     
+    <ul class="list-group list-group-flush" id="text">
+        {% for pending in requested_connections %}
+                <br> 
+                <li class="list-group-item alumnus"> 
+                        {% if pending.userid == current_user.id %}
+                            {% if pending.avatar == None %}
+                                  <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"> {{ pending.fullname }}
+                            {% else %}
+                                  <img src="{{ pending.avatar }}" 
+                            class="rounded-circle" width="40" height="33"> {{ pending.fullname }}
+                            {% endif %}
+                        {% else %}
+                            No pending requests for Connections                              
+                        {% endif %}
+                    <br> 
+                </li>
+                <br>
+        {% endfor %}
+    </ul>
+
+  </div>
+
+  <h4><i class="fas fa-user-graduate"></i> Connections</h4>
+
+  <div class="content">
+     
+    <ul class="list-group list-group-flush" id="text">
+        {% for accepted in approved_connections %}
+                <br> 
+                <li class="list-group-item alumnus"> 
+                        {% if accepted.userid == current_user.id %}
+                            {% if accepted.avatar == None %}
+                                  <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"> {{ accepted.fullname }}
+                            {% else %}
+                                  <img src="{{ accepted.avatar }}" 
+                            class="rounded-circle" width="40" height="33"> {{ accepted.fullname }}
+                            {% endif %}
+                        {% else %}
+                            No pending requests for Connections                              
+                        {% endif %}
+                    <br> 
+                </li>
+                <br>
+        {% endfor %}
+    </ul>
+
+  </div> 
+
+  <br>
+{% endblock %}
