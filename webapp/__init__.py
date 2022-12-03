@@ -7,7 +7,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'SE Pot!!!**%%##WooJ'
-    app.config['SQLALCHEMY_DATABASE_URI'] =  'mysql://flaskycon:^Dev3l0pmEnt!!@localhost/pythonlogin'
+    app.config['SQLALCHEMY_DATABASE_URI'] =  'mysql://alumnyydb:password@localhost/alumnyy'
     db.init_app(app)
 
     from .views import views
