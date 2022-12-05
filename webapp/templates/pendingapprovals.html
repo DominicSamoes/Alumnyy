@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Connections{% endblock %}
+
+{% block content %}
+
+<br>
+
+<h4><i class="fas fa-graduation-cap"></i> Approve Connection(s)</h4>
+
+<div class="content">
+   
+  <ul class="list-group list-group-flush" id="text">
+      {% for approve in approve_connections %}
+              <br> 
+              <li class="list-group-item alumnus"> 
+                            {% if approve.avatar == None %}
+                                <a href="/profile?id={{ approve.id }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ approve.id }}">{{ approve.fullname }}</a>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Decline"> <i class="fas fa-trash"></i> Decline</a>  
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Accept"> <i class="fas fa-handshake"></i> Accept</a>
+                            {% else %}
+                                <a href="/profile?id={{ approve.id }}"><img src="{{ approve.avatar }}" 
+                            class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ approve.id }}">{{ approve.fullname }}</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Decline"> <i class="fas fa-trash"></i> Decline</a>  
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Accept"> <i class="fas fa-handshake"></i> Accept</a>
+                            {% endif %}
+                  <br> 
+              </li>
+              <br>
+      {% endfor %}
+  </ul>
+
+</div> 
+
+<br>
+
+{% endblock %}

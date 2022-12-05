@@ -52,12 +52,27 @@ def connectprofile():
     alumnus = User.query
     return render_template("connectionprofile.html", user=current_user, alumnus=alumnus, id=id)
 
+@views.route('/pendingrequest')
+@login_required
+def connection_request():
+    """Returns alumni who have been sent a connection request"""
+    requested_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.recid WHERE connect.initid = :val', {'val': current_user.id})
+    return render_template('pendingrequests.html', requested_connections = requested_connections)
+
 @views.route('/connections')
 @login_required
 def connections():
-    """Returns pending requests and approved connection requests"""
-    requested_connections = db.session.execute('SELECT * FROM connect INNER JOIN user ON connect.initid = :val', {'val': current_user.id})
-    return render_template('connections.html', requested_connections = requested_connections)
+    """Returns alumni who have connections"""
+    #approved_connections = 
+    return render_template('connections.html')
+
+@views.route('/pendingapproval')
+@login_required
+def connection_approve():
+    """Returns alumni who want to connect"""
+    #SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE connect.recid
+    approve_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE connect.recid = :val', {'val': current_user.id})
+    return render_template('pendingapprovals.html', approve_connections = approve_connections)
 
 @views.route('/posts')
 @login_required 
