@@ -16,9 +16,11 @@
                             {% if pending.avatar == None %}
                                 <a href="/profile?id={{ pending.id }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
                                   class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ pending.id }}">{{ pending.fullname }}</a>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Delete Request"> <i class="fas fa-trash"></i> Delete Request</a> 
                             {% else %}
                                 <a href="/profile?id={{ pending.id }}"><img src="{{ pending.avatar }}" 
                             class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ pending.id }}">{{ pending.fullname }}</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Delete Request"> <i class="fas fa-trash"></i> Delete Request</a> 
                             {% endif %}
                     <br> 
                 </li>

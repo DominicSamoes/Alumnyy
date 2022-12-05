@@ -9,15 +9,15 @@
 <div class="content">
    
   <ul class="list-group list-group-flush" id="text">
-      {% for accepted in approved_connections %}
+      {% for approved in approved_connections %}
               <br> 
               <li class="list-group-item alumnus"> 
-                            {% if pending.avatar == None %}
-                                <a href="/profile?id={{ pending.id }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
-                                  class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ pending.id }}">{{ pending.fullname }}</a>
+                            {% if approved.avatar == None %}
+                                <a href="/connectprofile?id={{ approved.connectb }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"></a> <a href="/connectprofile?id={{ approved.connectb}}">{{ approved.fullname }}</a>
                             {% else %}
-                                <a href="/profile?id={{ pending.id }}"><img src="{{ pending.avatar }}" 
-                            class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ pending.id }}">{{ pending.fullname }}</a>
+                                <a href="/connectprofile?id={{ approved.connectb }}"><img src="{{ approved.avatar }}" 
+                            class="rounded-circle" width="40" height="33"></a> <a href="/connectprofile?id={{ approved.connectb }}">{{ approved.fullname }}</a>
                             {% endif %}
                   <br> 
               </li>

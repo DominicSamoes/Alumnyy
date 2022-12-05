@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, jsonify, url_for
 from flask_login import login_required, current_user
-from .models import user as User, post as Post, connect as Connect, db
+from .models import user as User, post as Post, connect as Connect, approvedconnection as ApprovedConnection, db
 from  sqlalchemy.sql.expression import func
 import json
 
@@ -49,8 +49,8 @@ def requestconnection():
 def connectprofile():
     """Returns profile of alumnus connected with"""
     id = request.args.get('id')
-    alumnus = User.query
-    return render_template("connectionprofile.html", user=current_user, alumnus=alumnus, id=id)
+    alumnus = db.session.execute('SELECT * FROM user WHERE id = :val', {'val': id})
+    return render_template("connectprofile.html", user=current_user, alumnus=alumnus)
 
 @views.route('/pendingrequest')
 @login_required
@@ -62,17 +62,42 @@ def connection_request():
 @views.route('/connections')
 @login_required
 def connections():
-    """Returns alumni who have connections"""
-    #approved_connections = 
-    return render_template('connections.html')
+    """Returns alumni connections"""
+    approved_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
+    return render_template('connections.html', approved_connections = approved_connections)
 
 @views.route('/pendingapproval')
 @login_required
 def connection_approve():
     """Returns alumni who want to connect"""
-    #SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE connect.recid
     approve_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE connect.recid = :val', {'val': current_user.id})
     return render_template('pendingapprovals.html', approve_connections = approve_connections)
+
+@views.route('/approval', methods=['GET'])
+@login_required
+def connection_approval():
+    """Approve connection requests"""
+    approve = request.args.get('approve')
+
+    if (approve != 404):
+        connapp = ApprovedConnection(connecta=current_user.id, connectb=approve)
+        db.session.add(connapp)
+        Connect.query.filter(Connect.initid == approve).delete()
+        db.session.commit()
+        flash('Connection approved!', category='success')
+        return redirect(url_for('views.connections'))
+
+@views.route('/decline', methods=['GET'])
+@login_required
+def connection_decline():
+    """Decline connection requests"""
+    decline = request.args.get('decline')
+
+    if (decline != 404):
+        Connect.query.filter(Connect.initid == decline).delete()
+        db.session.commit()
+        flash('Connection declined!', category='success')
+        return redirect(url_for('views.connections'))
 
 @views.route('/posts')
 @login_required 

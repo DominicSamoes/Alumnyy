@@ -62,7 +62,7 @@ class connect(db.Model):
     initid = db.Column(db.Integer, db.ForeignKey('user.id'))
     recid = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class connection(db.Model):
+class approvedconnection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     connecta = db.Column(db.Integer, db.ForeignKey('user.id'))
