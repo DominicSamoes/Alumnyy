@@ -16,11 +16,11 @@
                             {% if pending.avatar == None %}
                                 <a href="/profile?id={{ pending.recid }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
                                   class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ pending.recid }}">{{ pending.fullname }}</a>
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="decline?decline={{ pending.recid }}" title="Delete Request"> <i class="fas fa-trash"></i> Delete Request</a> 
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="declinereq?decline={{ pending.recid }}" title="Delete Request"> <i class="fas fa-trash"></i> Delete Request</a> 
                             {% else %}
                                 <a href="/profile?id={{ pending.recid }}"><img src="{{ pending.avatar }}" 
                             class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ pending.recid }}">{{ pending.fullname }}</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="decline?decline={{ pending.recid }}" title="Delete Request"> <i class="fas fa-trash"></i> Delete Request</a> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="declinereq?decline={{ pending.recid }}" title="Delete Request"> <i class="fas fa-trash"></i> Delete Request</a> 
                             {% endif %}
                     <br> 
                 </li>

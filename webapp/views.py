@@ -88,10 +88,22 @@ def connection_approval():
         flash('Connection approved!', category='success')
         return redirect(url_for('views.connections'))
 
+@views.route('/declinereq', methods=['GET'])
+@login_required
+def connection_sent_decline():
+    """Decline sent connection request(s)"""
+    decline = request.args.get('decline')
+
+    if (decline != 404):
+        Connect.query.filter(Connect.recid == decline).delete()
+        db.session.commit()
+        flash('Connection request removed!', category='success')
+        return redirect(url_for('views.connections'))
+
 @views.route('/decline', methods=['GET'])
 @login_required
 def connection_decline():
-    """Decline connection requests"""
+    """Decline received connection request(s)"""
     decline = request.args.get('decline')
 
     if (decline != 404):
