@@ -16,13 +16,13 @@
                             {% if approve.avatar == None %}
                                 <a href="/profile?id={{ approve.id }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
                                   class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ approve.id }}">{{ approve.fullname }}</a>
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/decline?decline={{ approve.initid }}" title="Decline"> <i class="fas fa-trash"></i> Decline</a>  
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/approval?approve={{ approve.initid }}" title="Accept"> <i class="fas fa-handshake"></i> Accept</a>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/approval?approve={{ approve.id }}" title="Decline"> <i class="fas fa-trash"></i> Decline</a>  
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/approval?approve={{ approve.id }}" title="Accept"> <i class="fas fa-handshake"></i> Accept</a>
                             {% else %}
                                 <a href="/profile?id={{ approve.id }}"><img src="{{ approve.avatar }}" 
                             class="rounded-circle" width="40" height="33"></a> <a href="/profile?id={{ approve.id }}">{{ approve.fullname }}</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/decline?decline={{ approve.initid }}" title="Decline"> <i class="fas fa-trash"></i> Decline</a>  
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/approval?approve={{ approve.initid }}" title="Accept"> <i class="fas fa-handshake"></i> Accept</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Decline"> <i class="fas fa-trash"></i> Decline</a>  
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="Accept"> <i class="fas fa-handshake"></i> Accept</a>
                             {% endif %}
                   <br> 
               </li>

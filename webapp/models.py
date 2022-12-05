@@ -16,7 +16,8 @@ class user(db.Model, UserMixin):
     occupation = db.Column(db.String(255))
     organisation = db.Column(db.String(255))
     year = db.Column(db.Integer)
-    bio = db.Column(db.String(800), )
+    bio = db.Column(db.String(800))
+    #visiblenumber = db.column(db.Integer)
     password = db.Column(db.String(255))
     post = db.relationship('post', backref='post')
 
@@ -34,6 +35,7 @@ class user(db.Model, UserMixin):
         self.organisation = organisation
         self.year = year
         self.bio = None
+        #self.visiblenumber = 0
         self.password = password
 
     def __repr__(self):

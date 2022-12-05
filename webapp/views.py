@@ -63,8 +63,9 @@ def connection_request():
 @login_required
 def connections():
     """Returns alumni connections"""
-    approved_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
-    return render_template('connections.html', approved_connections = approved_connections)
+    approved_sent_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
+    approved_request_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connecta WHERE approvedconnection.connectb = :val', {'val': current_user.id})
+    return render_template('connections.html', approved_sent_connections = approved_sent_connections, approved_request_connections = approved_request_connections)
 
 @views.route('/pendingapproval')
 @login_required

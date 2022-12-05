@@ -8,6 +8,8 @@
 <h4>Connection</h4>
 
   <div class="content">
+
+    {% for alumnus in alumnus %}
                 <div class="alumnus">
                     <b>
                         <p><i class="fas fa-user-plus"></i> Connected</p>
@@ -33,14 +35,16 @@
                     <p><i class="fas fa-briefcase"></i> {{ alumnus.occupation }}</p>
                     <p><i class="fas fa-building"></i> {{ alumnus.organisation }}</p>
                     <p><i class="fas fa-flag"></i> {{ alumnus.country }}</p>
-                    <p><i class="fas fa-envelope"></i> {{ alumnus.email }}</p>
-                    <p><i class="fas fa-message"></i></p>
+                    <p><a class="btn btn-primary" href="mailto:{{ alumnus.email }}"><i class="fas fa-envelope"></i> {{ alumnus.email }}</a></p>
+                    <p><a class="btn btn-primary" href="tel:{{ alumnus.mobilenumber }}"><i class='fas fa-phone'></i> {{ alumnus.mobilenumber }} </a></p>
+                    <p><a class="btn btn-primary" href=""><i class='fas fa-comment-alt'></i> Text </a></p>
                     {% if alumnus.bio != None %}
                     <p><i class="fas fa-book"></i> Biography</p>
                     <p>{{ alumnus.bio }}</p>
                     {% endif %}
 
                 </div>
+    {% endfor %}
   </div>
 
   <br>
