@@ -134,12 +134,14 @@ def post():
             db.session.add(new_post)
             db.session.commit()
             flash('Post is added successfully!', category='success')
+            return redirect(url_for("views.post"))
 
-    return render_template("post.html", user=current_user)    
+    return render_template("post.html")    
 
 @views.route('/deletepost', methods=['GET'])
 def delete_post():
     """Delete a post"""
     id = request.args.get('id')
-    userid = request.args.get('userid')
-    pass
+    Post.query.filter(Post.id == id).delete()
+    db.session.commit()
+    return redirect(url_for("views.post"))
