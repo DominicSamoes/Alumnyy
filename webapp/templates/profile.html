@@ -13,6 +13,7 @@
                 <div class="alumnus">
                     <b>
                         <a href="/request_connection?id={{ alumnus.id }}"><p><i class="fas fa-user-plus"></i> Connect</p></a>
+                        
                             {% if alumnus.avatar == None %}
                             <p class="name">
                                     <img src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"

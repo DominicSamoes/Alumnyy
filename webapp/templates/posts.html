@@ -13,7 +13,6 @@
         
     <ul class="list-group list-group-flush" id="text">
         {% for post in posts %}
-           {% for alumni in alumni %}
                 <br> 
                 <li class="list-group-item alumnus"> 
                         {% if post.userid == current_user.id %}
@@ -25,12 +24,12 @@
                             class="rounded-circle" width="40" height="33"> You
                             {% endif %}
                         {% else %}
-                            {% if alumni.avatar == None and post.userid == alumni.id %}
-                                  <img src="{{ url_for('static', filename='assets/default.png') }}" 
-                                  class="rounded-circle" width="40" height="33"> {{ alumni.fullname }}
+                            {% if post.avatar == None %}
+                                  <a href="profile?id={{ post.userid }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="40" height="33"> {{ post.fullname }} </a>
                             {% else %}
-                                  <img src="{{ alumni.avatar }}" 
-                            class="rounded-circle" width="40" height="33"> {{ alumni.fullname }}
+                                  <a href="profile?id={{ post.userid }}"><img src="{{ post.avatar }}" 
+                            class="rounded-circle" width="40" height="33"> {{ post.fullname }} </a>
                             {% endif %}                            
                         {% endif %}
                         <br><br>
@@ -40,7 +39,6 @@
                     <br> 
                 </li>
                 <br>
-            {% endfor %}
         {% endfor %}
     </ul>
     
