@@ -24,9 +24,7 @@
 <ul class="list-group list-group-flush" id="text">
     {% for post in current_user.post %}
         <li class="list-group-item"> <i class="fas fa-calendar"></i> {{ post.date.ctime() }}: <br> {{ post.text }}
-            <button type="button" class="close" onClick="deletePost({{ post.id }})">
-                <i class="fas fa-trash" title="Delete"></i>
-            </button>
+            <a class="btn btn-primary close" href="/deletepost?id={{ post.id }}&userid={{ post.userid }}"><i class="fas fa-trash" title="Delete"></i></a>
         </li>
         <br>
     {% endfor %}

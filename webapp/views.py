@@ -2,7 +2,6 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from .models import user as User, post as Post, connect as Connect, approvedconnection as ApprovedConnection, db
 from  sqlalchemy.sql.expression import func
-import json
 
 views = Blueprint('views', __name__)
 
@@ -138,7 +137,9 @@ def post():
 
     return render_template("post.html", user=current_user)    
 
-@views.route('/deletepost', methods=['POST'])
+@views.route('/deletepost', methods=['GET'])
 def delete_post():
     """Delete a post"""
+    id = request.args.get('id')
+    userid = request.args.get('userid')
     pass
