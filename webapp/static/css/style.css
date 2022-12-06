@@ -40,4 +40,7 @@
             padding-bottom: 58px;
             min-height: 100vh;
         }
-
+.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #ddd;
+}
