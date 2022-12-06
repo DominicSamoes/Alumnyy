@@ -7,7 +7,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'SE Pot!!!**%%##WooJ'
-    app.config['SQLALCHEMY_DATABASE_URI'] =  'mysql://flaskycon:^Dev3l0pmEnt!!@localhost/pythonlogin'
+    app.config['SQLALCHEMY_DATABASE_URI'] =  'mysql://flaskycon:^Dev3l0pmEnt!!@localhost/alumnyydb'
     db.init_app(app)
 
     from .views import views
@@ -20,7 +20,7 @@ def create_app():
 
     create_database(app)
 
-    # Manage logins
+    # Manage logins^Dev3l0pmEnt!!
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)

@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, jsonify, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from .models import user as User, post as Post, connect as Connect, approvedconnection as ApprovedConnection, db
 from  sqlalchemy.sql.expression import func
@@ -142,12 +142,4 @@ def post():
 @views.route('/deletepost', methods=['POST'])
 def delete_post():
     """Delete a post"""
-    post = json.loads(request.text)
-    postId = post['postId']
-    post = Post.query.get(postId)
-    if post:
-        if post.userid == current_user.userid:
-            db.session.delete(post)
-            db.session.commit()
-    
-    return jsonify({})
+    pass
