@@ -7,7 +7,7 @@
 ---
 
 ## General Requirements
-* 
+* For the project to run in a web server, it needs all the packages found in this [file](requirements.txt).
 * 
 
 ---
