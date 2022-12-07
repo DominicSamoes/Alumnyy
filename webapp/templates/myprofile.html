@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}MyProfile{% endblock %}
+
+{% block content %}
+<br>
+<div class="content">
+    <div class="alumnus">
+        <b>
+            {% if current_user.avatar == None %}
+            <p class="name">
+                <img id="EditProfile" src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"
+                width="200" height="136">
+                    <form method="post" action="/upload" enctype="multipart/form-data" class="form-inline">
+                        <div class="form-group">
+                            <label>Choose Image: </label>
+                            <input type="file" name="files[]" id="fileInput" class="form-control" >
+                        </div>
+                        <input type="submit" name="submit" class="btn btn-success" value="UPLOAD" />
+                    </form>
+                <hr>
+                {{ current_user.fullname }}
+            </p>
+            {% else %}
+            <p class="name">
+                <img id="EditProfile" src="{{ user.avatar }}" class="rounded-circle" width="200" height="136">
+                <form method="post" action="/upload" enctype="multipart/form-data" class="form-inline">
+                        <div class="form-group">
+                            <label>Choose Image: </label>
+                            <input type="file" name="files[]" id="fileInput" class="form-control" multiple>
+                        </div>
+                        <input type="submit" name="submit" class="btn btn-success" value="UPLOAD" />
+                    </form>
+                <hr>
+                {{ user.fullname }}
+            </p>                    
+            {% endif %}
+
+        </b>
+        <p><i class="fas fa-school"></i> {{ user.school }}</p>
+        <p><i class="fas fa-book-reader"></i> {{ user.programme }}</p>
+        <p><i class="fas fa-user-graduate"></i> {{ user.year }}</p>
+        <p><i class="fas fa-briefcase"></i> {{ user.occupation }}</p>
+        <p><i class="fas fa-building"></i> {{ user.organisation }}</p>
+        <p><i class="fas fa-flag"></i> {{ user.country }}</p>
+        <p><a class="" href="mailto:{{ user.email }}"><i class="fas fa-envelope"></i> {{ user.email }}</a></p>
+        <p><a class="" href="tel:{{ user.mobilenumber }}"><i class='fas fa-phone'></i> {{ user.mobilenumber }} </a></p>
+        
+
+        {% if user.bio != None %}
+        <p><i class="fas fa-book"></i> Biography</p>
+        <p>{{ user.bio }}</p>
+        {% endif %}
+
+    </div>
+</div>
+
+<br>
+<script>
+
+    $(document).ready(function () {
+            // File type validation
+        $("#fileInput").change(function () {
+                var match = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
+                    var file = this.files[0];
+                    var imagefile = file.type;
+                    if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]) || (imagefile == match[3]))) {
+                        alert('Please select a valid image file (JPEG/JPG/PNG/GIF).');
+                        $("#fileInput").val('');
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

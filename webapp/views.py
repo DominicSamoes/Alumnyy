@@ -1,8 +1,14 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 from .models import user as User, post as Post, connect as Connect, approvedconnection as ApprovedConnection, db
 from  sqlalchemy.sql.expression import func
-
+from werkzeug.utils import secure_filename
+import os
+from flask_mysqldb import MySQL, MySQLdb
+#import magic
+import urllib.request
+from . import *
+#UPLOAD_FOLDER = '/static/uploads'
 views = Blueprint('views', __name__)
 
 @views.route('/')
@@ -143,3 +149,34 @@ def delete_post():
     id = request.args.get('id')
     userid = request.args.get('userid')
     pass
+
+
+@views.route('/myprofile', methods=['GET', 'POST'])
+@login_required
+def Edit_profile():
+    """Returns profile of user"""
+    id = request.args.get('id')
+    return render_template("myprofile.html", user=current_user)
+
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+app = create_app()
+def allowed_file(filename):
+ return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+@views.route("/upload", methods=["POST", "GET"])
+@login_required
+def upload():
+    userid = request.args.get('userid')
+    if request.method == 'POST':
+        files = request.files.getlist('files[]')
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                basedir = os.path.abspath(os.path.dirname(__file__))
+                file.save(os.path.join(basedir,
+                                       app.config['UPLOAD_FOLDER'], filename))
+                db.session.execute('INSERT INTO user (avatar) VALUES (%S) WHERE id = :val', [filename], {'val': current_user.id})
+                db.session.commit()
+            print(file)
+        flash('Image successfully uploaded')
+    return redirect('/')

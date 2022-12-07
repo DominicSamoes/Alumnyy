@@ -37,7 +37,7 @@
                                 </ul>
                             </div> 
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
-                            <a class="nav-item nav-link" id="myprofile" href="/myprofile"><i class="fas fa-user"></i> {{ current_user.fullname }} </a>
+                            <a class="nav-item nav-link" id="myprofile" href="/myprofile"><i class="fas fa-user"></i> {{ current_user.fullname }}<sub style="display:block;text-align:center;">view profile</sub> </a>
                             <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
                         {% else %}
                             <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>
