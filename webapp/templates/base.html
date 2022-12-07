@@ -27,15 +27,16 @@
                             <a class="nav-item nav-link" id="home" href="/home"><i class="fas fa-home"></i> Home</a>
                             <a class="nav-item nav-link" id="posts" href="/posts"><i class="fas fa-plus"></i> Posts</a>
                             <div class="dropdown">
-                                <button class="dropbtn"
-                                    <a class="nav-item nav-link" id="connections" href="#"><i class="fas fa-handshake"></i> Manage Connections <i class="fa fa-caret-down"></i></a>
-                                </button>
+                  
+                                <a class="nav-item nav-link" id="connections" href="#"><i class="fas fa-handshake"></i> Manage Connections <i class="fa fa-caret-down"></i></a>
+
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="/connections"><i class="fas fa-user-graduate"></i> Connections</a></li>
                                     <li><a class="dropdown-item" href="/pendingapproval"><i class="fas fa-graduation-cap"></i> Approve Connection</a></li>
                                     <li><a class="dropdown-item" href="/pendingrequest"><i class="fas fa-user-plus"></i> Pending Requests</a></li>
                                 </ul>
                             </div> 
+                            <a class="nav-item nav-link" id="chat" href="/chat"><i class="fas fa-comment-alt"></i> Messages</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
                             <a class="nav-item nav-link" id="myprofile" href="/myprofile"><i class="fas fa-user"></i> {{ current_user.fullname }} </a>
                             <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
