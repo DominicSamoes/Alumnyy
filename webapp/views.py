@@ -2,6 +2,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from .models import user as User, post as Post, connect as Connect, approvedconnection as ApprovedConnection, db
 from  sqlalchemy.sql.expression import func
+from sqlalchemy import update
 
 views = Blueprint('views', __name__)
 
@@ -55,22 +56,27 @@ def connectprofile():
 @login_required
 def connection_request():
     """Returns alumni who have been sent a connection request"""
-    requested_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.recid WHERE connect.initid = :val', {'val': current_user.id})
+    requested_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON\
+         user.id = connect.recid WHERE connect.initid = :val', {'val': current_user.id})
     return render_template('pendingrequests.html', requested_connections = requested_connections)
 
 @views.route('/connections')
 @login_required
 def connections():
     """Returns alumni connections"""
-    approved_sent_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
-    approved_request_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connecta WHERE approvedconnection.connectb = :val', {'val': current_user.id})
-    return render_template('connections.html', approved_sent_connections = approved_sent_connections, approved_request_connections = approved_request_connections)
+    approved_sent_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON\
+         user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
+    approved_request_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON\
+         user.id = approvedconnection.connecta WHERE approvedconnection.connectb = :val', {'val': current_user.id})
+    return render_template('connections.html', approved_sent_connections = approved_sent_connections,\
+         approved_request_connections = approved_request_connections)
 
 @views.route('/pendingapproval')
 @login_required
 def connection_approve():
     """Returns alumni who want to connect"""
-    approve_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE connect.recid = :val', {'val': current_user.id})
+    approve_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE\
+         connect.recid = :val', {'val': current_user.id})
     return render_template('pendingapprovals.html', approve_connections = approve_connections)
 
 @views.route('/approval', methods=['GET'])
@@ -85,7 +91,7 @@ def connection_approval():
         Connect.query.filter(Connect.initid == approve).delete()
         db.session.commit()
         flash('Connection approved!', category='success')
-        return redirect(url_for('views.connections'))
+        return redirect(url_for('views.pendingapproval'))
 
 @views.route('/declinereq', methods=['GET'])
 @login_required
@@ -97,7 +103,7 @@ def connection_sent_decline():
         Connect.query.filter(Connect.recid == decline).delete()
         db.session.commit()
         flash('Connection request removed!', category='success')
-        return redirect(url_for('views.connections'))
+        return redirect(url_for('views.pendingrequest'))
 
 @views.route('/decline', methods=['GET'])
 @login_required
@@ -109,7 +115,7 @@ def connection_decline():
         Connect.query.filter(Connect.initid == decline).delete()
         db.session.commit()
         flash('Connection declined!', category='success')
-        return redirect(url_for('views.connections'))
+        return redirect(url_for('views.pendingapproval'))
 
 @views.route('/posts')
 @login_required 
@@ -139,9 +145,25 @@ def post():
     return render_template("post.html")    
 
 @views.route('/deletepost', methods=['GET'])
+@login_required
 def delete_post():
     """Delete a post"""
     id = request.args.get('id')
     Post.query.filter(Post.id == id).delete()
     db.session.commit()
     return redirect(url_for("views.post"))
+
+@views.route('/myprofile', methods=['GET', 'POST'])
+@login_required 
+def my_profile():
+    """Returns profile of current user"""
+    if request.method == 'POST':
+        bio = request.form.get('bio')
+        db.session.query(User).\
+            filter(User.id == current_user.id).\
+                update({'bio': bio})
+        db.session.commit()
+        return redirect(url_for("views.my_profile"))
+
+    return render_template("myprofile.html")
+

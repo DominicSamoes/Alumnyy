@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+
+<br>
+
+  <div class="content">
+        
+                <div class="alumnus">
+                    <b>
+                        
+                            {% if current_user.avatar == None %}
+                            <p class="name">
+                                    <img src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"
+                                     width="200" height="136">
+                                <br>
+                                {{ current_user.fullname }}
+                            </p>
+                            {% else %}
+                            <p class="name">
+                                   <img src="{{ current_user.avatar }}" class="rounded-circle" width="200" height="136">
+                                <br>
+                                {{ current_user.fullname }}
+                            </p>                    
+                            {% endif %}
+
+                    </b>
+                    <p><i class="fas fa-school"></i> {{ current_user.school }}</p>
+                    <p><i class="fas fa-book-reader"></i> {{ current_user.programme }}</p>
+                    <p><i class="fas fa-user-graduate"></i> {{ current_user.year }}</p>
+                    <p><i class="fas fa-briefcase"></i> {{ current_user.occupation }}</p>
+                    <p><i class="fas fa-building"></i> {{ current_user.organisation }}</p>
+                    <p><i class="fas fa-flag"></i> {{ current_user.country }}</p>
+
+                    <div class="register">
+                        <form method="POST" enctype="multipart/form-data" autocomplete="off">
+                            <div class="form-group">
+                                <p><i class="fas fa-book"></i> Biography</p>
+                                <textarea id="bio" class="form-control" name="bio">{{ current_user.bio }}</textarea>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+
+
+
+                </div>
+
+  </div>
+
+  <br>
+{% endblock %}
