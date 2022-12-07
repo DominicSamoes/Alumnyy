@@ -5,25 +5,34 @@
 
 <br>
 
-  <div class="content">
+<div class="content">
+    <div class="alumnus">
         
-                <div class="alumnus">
-                    <b>
-                        
+                    <div class="container">
+                        <div class="picture-container">
+
+                            <h6 class="">Click Picture to Update Profile Picture</h6>
+
                             {% if current_user.avatar == None %}
-                            <p class="name">
-                                    <img src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"
-                                     width="200" height="136">
+                                <div class="picture">
+                                    <img src="{{ url_for('static', filename='assets/default.png') }}" class="picture-src" id="wizardPicturePreview" title="Click to Upload Image">
+                                    <input type="file" id="wizard-picture" class="">
+                                </div>
                                 <br>
-                                {{ current_user.fullname }}
-                            </p>
+                                     <p class="name">{{ current_user.fullname }}</p>
+                                <br>
                             {% else %}
-                            <p class="name">
-                                   <img src="{{ current_user.avatar }}" class="rounded-circle" width="200" height="136">
+                                <div class="picture">
+                                    <img src="{{ current_user.avatar }}" class="picture-src" id="wizardPicturePreview" title="Click to Upload Image">
+                                    <input type="file" id="wizard-picture" class="">
+                                </div>
                                 <br>
-                                {{ current_user.fullname }}
-                            </p>                    
+                                    <p class="name">{{ current_user.fullname }}</p>
+                                <br>                           
                             {% endif %}
+
+                        </div>
+                    </div>
 
                     </b>
                     <p><i class="fas fa-school"></i> {{ current_user.school }}</p>
