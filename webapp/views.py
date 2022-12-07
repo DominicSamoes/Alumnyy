@@ -167,3 +167,7 @@ def my_profile():
 
     return render_template("myprofile.html")
 
+@views.route('/chat')
+@login_required 
+def chat():
+    return render_template("chat.html")
