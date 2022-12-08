@@ -168,15 +168,19 @@ def allowed_file(filename):
 def upload():
     userid = request.args.get('userid')
     if request.method == 'POST':
-        files = request.files.getlist('files[]')
-        for file in files:
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                basedir = os.path.abspath(os.path.dirname(__file__))
-                file.save(os.path.join(basedir,
+        file = request.files["files[]"]
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            basedir = os.path.abspath(os.path.dirname(__file__))
+            file.save(os.path.join(basedir,
                                        app.config['UPLOAD_FOLDER'], filename))
-                db.session.execute('INSERT INTO user (avatar) VALUES (%S) WHERE id = :val', [filename], {'val': current_user.id})
-                db.session.commit()
-            print(file)
-        flash('Image successfully uploaded')
-    return redirect('/')
+            filepath = UPLOAD_FOLDER + '/' + filename
+            db.session.execute('UPDATE user SET avatar = :val WHERE id = :ID', {'val': filepath, 'ID': current_user.id} )
+            db.session.commit()
+            flash('Image successfully uploaded')
+            return redirect('/')
+        else:
+            flash("please try again")
+            return redirect('/')
+         
+    
