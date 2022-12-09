@@ -185,6 +185,9 @@ def upload():
     userid = request.args.get('userid')
     if request.method == 'POST':
         file = request.files["files[]"]
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(url_for("views.my_profile"))
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             from main import app
@@ -197,7 +200,7 @@ def upload():
             flash('Image successfully uploaded')
             return redirect('/')
         else:
-            flash("please try again")
+            flash("Something went wrong please try again")
             return redirect('/')
         
 
