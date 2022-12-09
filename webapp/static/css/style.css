@@ -1,79 +1,78 @@
 .content {
-            margin: 5px;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
-        .alumnus {
-            flex: 20%;
-            padding: 10px;
-            margin: 5px;
-            background-color: #f3f3f3;
-            inline-size: 100%;
-        }
-
-        .name {
-            color: #000000;
-            text-decoration: none;
-            text-align: center;
-        }        
-        .bio {
-            padding: 10px;
-            margin: 5px;
-            background-color: #ffffff;
-            color: #004835;
-        }
-        footer {
-            text-align: center;
-            background-color: #333;
-            color: #fff;
-            padding: 1px;
-            bottom: 0;
-            width: 100%;
-            /* position: fixed; */
-            position: absolute;
-        }
-        body {
-            position: relative;
-            padding-bottom: 58px;
-            min-height: 100vh;
-        }
-.dropdown-menu .dropdown-item {
+.alumnus {
+    flex: 20%;
+    padding: 10px;
+    margin: 5px;
     background-color: #f3f3f3;
+    inline-size: 100%;
+}
+
+.name {
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+}        
+.bio {
+    padding: 10px;
+    margin: 5px;
+    background-color: #ffffff;
+    color: #004835;
+}
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1px;
+    bottom: 0;
+    width: 100%;
+    /* position: fixed; */
+    position: absolute;
+}
+body {
+    position: relative;
+    padding-bottom: 58px;
+    min-height: 100vh;
+}
+.dropdown-menu .dropdown-item {
+background-color: #f3f3f3;
 }
 .dropdown:hover .dropdown-menu {
-    display: block;
-    background-color: #ccc;
+display: block;
+background-color: #ccc;
 }
 .dropdown-menu a:hover {
-    background-color: #ddd;
+background-color: #ddd;
 }
 .navbar a {
-    float: left;
-    /*text-align: center;*/
-    padding: 14px 16px;
-    text-decoration: none;
+float: left;
+/*text-align: center;*/
+padding: 14px 16px;
+text-decoration: none;
 }
 .dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: whitesmoke;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
+font-size: 16px;
+border: none;
+outline: none;
+color: whitesmoke;
+padding: 14px 16px;
+background-color: inherit;
+font-family: inherit;
+margin: 0;
 }
 /*Profile Pic Start*/
-.picture-container {
+.picture-container{
     position: relative;
     cursor: pointer;
     text-align: center;
 }
-
-.picture {
+.picture{
     width: 106px;
     height: 106px;
     background-color: #999999;
@@ -85,27 +84,21 @@
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
 }
-
-.picture:hover {
+.picture:hover{
     border-color: #2ca8ff;
 }
-
-.content.ct-wizard-green .picture:hover {
+.content.ct-wizard-green .picture:hover{
     border-color: #05ae0e;
 }
-
-.content.ct-wizard-blue .picture:hover {
+.content.ct-wizard-blue .picture:hover{
     border-color: #3472f7;
 }
-
-.content.ct-wizard-orange .picture:hover {
+.content.ct-wizard-orange .picture:hover{
     border-color: #ff9500;
 }
-
-.content.ct-wizard-red .picture:hover {
+.content.ct-wizard-red .picture:hover{
     border-color: #ff3b30;
 }
-
 .picture input[type="file"] {
     cursor: pointer;
     display: block;
@@ -117,9 +110,8 @@
     width: 100%;
 }
 
-.picture-src {
+.picture-src{
     width: 100%;
-
+    
 }
-
 /*Profile Pic End*/

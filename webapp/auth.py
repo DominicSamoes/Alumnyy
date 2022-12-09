@@ -29,7 +29,6 @@ def login():
 @auth.route('/signup', methods=['POST', 'GET'] )
 def signup():
     if request.method == 'POST':
-
         email = request.form.get('email')
         fullname = request.form.get('fullname')
         country = request.form.get('country')

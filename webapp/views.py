@@ -8,7 +8,8 @@ from flask_mysqldb import MySQL, MySQLdb
 #import magic
 import urllib.request
 from . import *
-#UPLOAD_FOLDER = '/static/uploads'
+from sqlalchemy import update
+
 views = Blueprint('views', __name__)
 
 @views.route('/')
@@ -61,22 +62,27 @@ def connectprofile():
 @login_required
 def connection_request():
     """Returns alumni who have been sent a connection request"""
-    requested_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.recid WHERE connect.initid = :val', {'val': current_user.id})
+    requested_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON\
+         user.id = connect.recid WHERE connect.initid = :val', {'val': current_user.id})
     return render_template('pendingrequests.html', requested_connections = requested_connections)
 
 @views.route('/connections')
 @login_required
 def connections():
     """Returns alumni connections"""
-    approved_sent_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
-    approved_request_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON user.id = approvedconnection.connecta WHERE approvedconnection.connectb = :val', {'val': current_user.id})
-    return render_template('connections.html', approved_sent_connections = approved_sent_connections, approved_request_connections = approved_request_connections)
+    approved_sent_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON\
+         user.id = approvedconnection.connectb WHERE approvedconnection.connecta  = :val', {'val': current_user.id})
+    approved_request_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON\
+         user.id = approvedconnection.connecta WHERE approvedconnection.connectb = :val', {'val': current_user.id})
+    return render_template('connections.html', approved_sent_connections = approved_sent_connections,\
+         approved_request_connections = approved_request_connections)
 
 @views.route('/pendingapproval')
 @login_required
 def connection_approve():
     """Returns alumni who want to connect"""
-    approve_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE connect.recid = :val', {'val': current_user.id})
+    approve_connections = db.session.execute('SELECT * FROM user INNER JOIN connect ON user.id = connect.initid WHERE\
+         connect.recid = :val', {'val': current_user.id})
     return render_template('pendingapprovals.html', approve_connections = approve_connections)
 
 @views.route('/approval', methods=['GET'])
@@ -91,7 +97,7 @@ def connection_approval():
         Connect.query.filter(Connect.initid == approve).delete()
         db.session.commit()
         flash('Connection approved!', category='success')
-        return redirect(url_for('views.connections'))
+        return redirect(url_for('views.pendingapproval'))
 
 @views.route('/declinereq', methods=['GET'])
 @login_required
@@ -103,7 +109,7 @@ def connection_sent_decline():
         Connect.query.filter(Connect.recid == decline).delete()
         db.session.commit()
         flash('Connection request removed!', category='success')
-        return redirect(url_for('views.connections'))
+        return redirect(url_for('views.pendingrequest'))
 
 @views.route('/decline', methods=['GET'])
 @login_required
@@ -115,7 +121,7 @@ def connection_decline():
         Connect.query.filter(Connect.initid == decline).delete()
         db.session.commit()
         flash('Connection declined!', category='success')
-        return redirect(url_for('views.connections'))
+        return redirect(url_for('views.pendingapproval'))
 
 @views.route('/posts')
 @login_required 
@@ -140,16 +146,18 @@ def post():
             db.session.add(new_post)
             db.session.commit()
             flash('Post is added successfully!', category='success')
+            return redirect(url_for("views.post"))
 
-    return render_template("post.html", user=current_user)    
+    return render_template("post.html")    
 
 @views.route('/deletepost', methods=['GET'])
+@login_required
 def delete_post():
     """Delete a post"""
     id = request.args.get('id')
-    userid = request.args.get('userid')
-    pass
-
+    Post.query.filter(Post.id == id).delete()
+    db.session.commit()
+    return redirect(url_for("views.post"))
 
 @views.route('/myprofile', methods=['GET', 'POST'])
 @login_required 
@@ -191,5 +199,9 @@ def upload():
         else:
             flash("please try again")
             return redirect('/')
-         
-    
+        
+
+@views.route('/chat')
+@login_required 
+def chat():
+    return render_template("chat.html")
