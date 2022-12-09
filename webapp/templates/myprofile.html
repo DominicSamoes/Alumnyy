@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}MyProfile{% endblock %}
+{% block title %}My Profile{% endblock %}
 
 {% block content %}
 <br>
@@ -46,30 +46,20 @@
         <p><a class="" href="tel:{{ user.mobilenumber }}"><i class='fas fa-phone'></i> {{ user.mobilenumber }} </a></p>
         
 
-        {% if user.bio != None %}
-        <p><i class="fas fa-book"></i> Biography</p>
-        <p>{{ user.bio }}</p>
-        {% endif %}
+        <div class="register">
+            <form method="POST" enctype="multipart/form-data" autocomplete="off">
+                <div class="form-group">
+                    <p><i class="fas fa-book"></i> Biography</p>
+                    <textarea id="bio" class="form-control" name="bio">{{ current_user.bio }}</textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+        </div>
 
     </div>
 </div>
 
 <br>
-<script>
 
-    $(document).ready(function () {
-            // File type validation
-        $("#fileInput").change(function () {
-                var match = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
-                    var file = this.files[0];
-                    var imagefile = file.type;
-                    if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]) || (imagefile == match[3]))) {
-                        alert('Please select a valid image file (JPEG/JPG/PNG/GIF).');
-                        $("#fileInput").val('');
-                        return false;
-                    }
-                }
-            });
-        });
-    </script>
 {% endblock %}

@@ -152,15 +152,23 @@ def delete_post():
 
 
 @views.route('/myprofile', methods=['GET', 'POST'])
-@login_required
-def Edit_profile():
-    """Returns profile of user"""
-    id = request.args.get('id')
+@login_required 
+def my_profile():
+    """Returns profile of current user"""
+    if request.method == 'POST':
+        bio = request.form.get('bio')
+        db.session.query(User).\
+            filter(User.id == current_user.id).\
+                update({'bio': bio})
+        db.session.commit()
+        return redirect(url_for("views.my_profile"))
+
     return render_template("myprofile.html", user=current_user)
 
 
+
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-app = create_app()
+# app = create_app()
 def allowed_file(filename):
  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 @views.route("/upload", methods=["POST", "GET"])
@@ -171,6 +179,7 @@ def upload():
         file = request.files["files[]"]
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            from main import app
             basedir = os.path.abspath(os.path.dirname(__file__))
             file.save(os.path.join(basedir,
                                        app.config['UPLOAD_FOLDER'], filename))

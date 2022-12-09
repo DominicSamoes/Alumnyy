@@ -10,7 +10,7 @@ from flask_login import login_required, current_user
 
 db = SQLAlchemy()
 
-UPLOAD_FOLDER = './static/uploads'
+UPLOAD_FOLDER = './static/pp'
 
 def create_app():
     app = Flask(__name__)
