@@ -1,7 +1,13 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 from .models import user as User, post as Post, connect as Connect, approvedconnection as ApprovedConnection, db
 from  sqlalchemy.sql.expression import func
+from werkzeug.utils import secure_filename
+import os
+from flask_mysqldb import MySQL, MySQLdb
+#import magic
+import urllib.request
+from . import *
 from sqlalchemy import update
 
 views = Blueprint('views', __name__)
@@ -165,7 +171,38 @@ def my_profile():
         db.session.commit()
         return redirect(url_for("views.my_profile"))
 
-    return render_template("myprofile.html")
+    return render_template("myprofile.html", user=current_user)
+
+
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+# app = create_app()
+def allowed_file(filename):
+ return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+@views.route("/upload", methods=["POST", "GET"])
+@login_required
+def upload():
+    userid = request.args.get('userid')
+    if request.method == 'POST':
+        file = request.files["files[]"]
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(url_for("views.my_profile"))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            from main import app
+            basedir = os.path.abspath(os.path.dirname(__file__))
+            file.save(os.path.join(basedir,
+                                       app.config['UPLOAD_FOLDER'], filename))
+            filepath = UPLOAD_FOLDER + '/' + filename
+            db.session.execute('UPDATE user SET avatar = :val WHERE id = :ID', {'val': filepath, 'ID': current_user.id} )
+            db.session.commit()
+            flash('Image successfully uploaded')
+            return redirect('/')
+        else:
+            flash("Something went wrong please try again")
+            return redirect('/')
+        
 
 @views.route('/chat')
 @login_required 
