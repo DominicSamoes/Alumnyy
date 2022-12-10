@@ -10,32 +10,23 @@
             <p class="name">
                 <img id="EditProfile" src="{{ url_for('static', filename='assets/default.png') }}" class="rounded-circle"
                 width="200" height="136">
-                    <form method="post" action="/upload" enctype="multipart/form-data" class="form-inline">
-                        <div class="form-group">
-                            <label>Choose Image: </label>
-                            <input type="file" name="files[]" id="fileInput" class="form-control" >
-                        </div>
-                        <input type="submit" name="submit" class="btn btn-success" value="UPLOAD" />
-                    </form>
-                <hr>
-                {{ current_user.fullname }}
             </p>
             {% else %}
             <p class="name">
                 <img id="EditProfile" src="{{ user.avatar }}" class="rounded-circle" width="200" height="136">
-                <form method="post" action="/upload" enctype="multipart/form-data" class="form-inline">
-                        <div class="form-group">
-                            <label>Choose Image: </label>
-                            <input type="file" name="files[]" id="fileInput" class="form-control" multiple>
-                        </div>
-                        <input type="submit" name="submit" class="btn btn-success" value="UPLOAD" />
-                    </form>
-                <hr>
-                {{ user.fullname }}
             </p>                    
             {% endif %}
+            <form method="post" action="/upload" enctype="multipart/form-data" class="form-inline">
+                <div class="form-group">
+                    <label>Upload Image: </label>
+                    <input type="file" name="files[]" id="fileInput" class="form-control" multiple>
+                </div>
+                <input type="submit" name="submit" class="btn btn-primary" value="Update Profile Picture" />
+            </form>
+        <br>
 
-        </b>
+        <p name="name"> {{ user.fullname }} </p>
+
         <p><i class="fas fa-school"></i> {{ user.school }}</p>
         <p><i class="fas fa-book-reader"></i> {{ user.programme }}</p>
         <p><i class="fas fa-user-graduate"></i> {{ user.year }}</p>

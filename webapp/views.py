@@ -14,7 +14,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def index():
-    """Display six random alumni and schools"""
+    """Displays six random alumni and schools"""
     alumni = User.query.order_by(func.rand()).limit(4)
     schools = db.session.execute('SELECT DISTINCT school FROM user  ORDER BY RAND() LIMIT 8')
     return render_template("index.html", alumni=alumni, schools=schools)
@@ -22,7 +22,7 @@ def index():
 @views.route('/home')
 @login_required 
 def home():
-    """Displays home page with six random alumni from different alma maters"""
+    """Displays home page with six random alumni from the same alma mata"""
     alumni = User.query.filter_by().order_by(func.rand())
     return render_template("home.html", user=current_user, alumni=alumni)
 
@@ -174,15 +174,13 @@ def my_profile():
     return render_template("myprofile.html", user=current_user)
 
 
-
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-# app = create_app()
+
 def allowed_file(filename):
  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 @views.route("/upload", methods=["POST", "GET"])
 @login_required
 def upload():
-    userid = request.args.get('userid')
     if request.method == 'POST':
         file = request.files["files[]"]
         if file.filename == '':
@@ -197,11 +195,11 @@ def upload():
             filepath = UPLOAD_FOLDER + '/' + filename
             db.session.execute('UPDATE user SET avatar = :val WHERE id = :ID', {'val': filepath, 'ID': current_user.id} )
             db.session.commit()
-            flash('Image successfully uploaded')
-            return redirect('/')
+            flash('Profile picture successfully uploaded')
+            return redirect(url_for("views.my_profile"))
         else:
-            flash("Something went wrong please try again")
-            return redirect('/')
+            flash("Something went wrong please try again and make sure image is a jpg, jpeg, png, or gif")
+            return redirect(url_for("views.my_profile"))
         
 
 @views.route('/chat')

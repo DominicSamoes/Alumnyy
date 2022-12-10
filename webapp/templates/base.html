@@ -38,7 +38,17 @@
                             </div> 
                             <a class="nav-item nav-link" id="chat" href="/chat"><i class="fas fa-comment-alt"></i> Messages</a>
                             <a class="nav-item nav-link" id="about" href="/about"><i class="fas fa-book-open"></i> About</a>
-                            <a class="nav-item nav-link" id="myprofile" href="/myprofile"><i class="fas fa-user"></i> {{ current_user.fullname }}<sub style="display:block;text-align:center;">view profile</sub> </a>
+                            <a class="nav-item nav-link" id="myprofile" href="/myprofile">
+                                
+                                    {% if current_user.avatar == None %}
+                                        <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                        class="rounded-circle" width="40" height="23">
+                                    {% else %}
+                                        <img src="{{ current_user.avatar }}" 
+                                        class="rounded-circle" width="40" height="23">
+                                    {% endif %}
+                                
+                                {{ current_user.fullname }}</a>
                             <a class="nav-item nav-link" id="logout" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
                         {% else %}
                             <a class="nav-item nav-link" id="home" href="/"><i class="fas fa-home"></i> Home</a>

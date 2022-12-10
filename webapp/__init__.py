@@ -4,7 +4,6 @@ from flask_login import LoginManager
 from flask_mysqldb import MySQL, MySQLdb
 from werkzeug.utils import secure_filename
 import os
-#import magic
 import urllib.request
 from flask_login import login_required, current_user
 
@@ -15,7 +14,7 @@ UPLOAD_FOLDER = './static/pp'
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'SE Pot!!!**%%##WooJ'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://flaskycon:^Dev3l0pmEnt!!@localhost/pythonlogin'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://flaskycon:^Dev3l0pmEnt!!@localhost/alumnyydb'
     db.init_app(app)
     app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

@@ -15,24 +15,21 @@
            {% if alumnus.school == current_user.school and alumnus.id != current_user.id %}
                 <div class="alumnus">
                     <b>
+                        <p class="name">
                             {% if alumnus.avatar == None %}
-                            <p class="name">
                                 <a href="/profile?id={{ alumnus.id }}">
                                     <img src="{{ url_for('static', filename='assets/default.png') }}"
                                      class="rounded-circle" width="200" height="136">
                                 </a>
-                                <br>
-                                <a href="/profile?id={{ alumnus.id }}">{{ alumnus.fullname }}</a>
-                            </p>
                             {% else %}
-                            <p class="name">
+
                                <a href="/profile?id={{ alumnus.id }}">
                                    <img src="{{ alumnus.avatar }}" class="rounded-circle" width="200" height="136">
-                               </a>
-                                <br>
-                                <a href="/profile?id={{ alumnus.id }}">{{ alumnus.fullname }}</a>
-                            </p>                    
+                               </a>                   
                             {% endif %}
+                            <br>
+                            <a href="/profile?id={{ alumnus.id }}">{{ alumnus.fullname }}</a>
+                        </p> 
 
                     </b>
                     <p><i class="fas fa-school"></i> {{ alumnus.school }}</p>
