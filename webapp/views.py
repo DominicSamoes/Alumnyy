@@ -127,7 +127,8 @@ def connection_decline():
 @login_required 
 def posts():
     """Returns posts by alma mater alumni"""
-    posts = db.session.execute('SELECT * FROM user INNER JOIN post ON user.id = post.userid WHERE user.school = :val', {'val': current_user.school})
+    posts = db.session.execute('SELECT * FROM user INNER JOIN post ON user.id = post.userid WHERE\
+         user.school = :val ORDER BY post.date DESC', {'val': current_user.school})
     return render_template("posts.html", user=current_user, posts=posts)
 
 @views.route('/post', methods=['GET', 'POST'])
