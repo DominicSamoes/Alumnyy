@@ -17,8 +17,8 @@ class user(db.Model, UserMixin):
     organisation = db.Column(db.String(255))
     year = db.Column(db.Integer)
     bio = db.Column(db.String(800))
-    #visiblenumber = db.column(db.Integer)
     password = db.Column(db.String(255))
+    online = db.Column(db.Integer)
     post = db.relationship('post', backref='post')
 
     def __init__(self, fullname, country, school, programme, mobilenumber, 
@@ -35,7 +35,7 @@ class user(db.Model, UserMixin):
         self.organisation = organisation
         self.year = year
         self.bio = None
-        #self.visiblenumber = 0
+        self.online = 1
         self.password = password
 
     def __repr__(self):
@@ -45,13 +45,6 @@ class school(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
     logo = db.Column(db.String(255))
-
-    def __init__(self, name, logo):
-        self.name = name
-        self.logo = logo
-
-    def __repr__(self):
-        return '<School %r>' % self.name
 
 class post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -69,3 +62,10 @@ class approvedconnection(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     connecta = db.Column(db.Integer, db.ForeignKey('user.id'))
     connectb = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+class chat(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    text = db.Column(db.String(1000))
+    msg_from = db.Column(db.Integer, db.ForeignKey('user.id'))
+    msg_to = db.Column(db.Integer, db.ForeignKey('user.id'))

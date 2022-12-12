@@ -15,6 +15,8 @@ def login():
         
         if User:
             if check_password_hash(User.password, password):
+                db.session.execute('UPDATE user SET online = :val WHERE id = :ID', {'val': 1, 'ID': User.id} )
+                db.session.commit()
                 flash('Logged in successfully.', category='success')
                 login_user(User, remember=True)
 
@@ -86,5 +88,7 @@ def signup():
 @auth.route('/logout')
 @login_required
 def logout():
+    db.session.execute('UPDATE user SET online = :val WHERE id = :ID', {'val': 0, 'ID': current_user.id} )
+    db.session.commit()
     logout_user()
     return redirect(url_for('auth.login'))
