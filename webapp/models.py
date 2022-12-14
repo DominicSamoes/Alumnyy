@@ -69,3 +69,12 @@ class chat(db.Model):
     text = db.Column(db.String(1000))
     msg_from = db.Column(db.Integer, db.ForeignKey('user.id'))
     msg_to = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, text, msg_from, msg_to):
+        self.date = datetime.datetime.now()
+        self.text = text
+        self.msg_from = msg_from
+        self.msg_to = msg_to
+
+    def __repr__(self):
+        return '<Chat %r>' % self.id

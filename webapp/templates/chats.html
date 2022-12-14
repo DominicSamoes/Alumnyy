@@ -1,15 +1,80 @@
-{% for message in chats %}
-    {% if (message.msg_from or message.msg_to) != current_user.id %}
-        <div class="" style="text-align:right; padding:2px 5px;">
-            <p>
-                <span class="" style="background-color: #28a7ab;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;"> {{ message.text }}</span>
-            </p>
-        </div>
-    {% else %}
-        <div class="" style="text-align:left; padding:2px 5px;">
-            <p>
-                <span class="" style="background-color: #dd92b2;color: #fff;margin: 1px 0;padding: 6px 12px; border-radius: 12px;"> {{ message.text }}</span>
-            </p>
-        </div>
-    {% endif %}
-{% endfor %}
+{% extends "base.html" %}
+{% block title %}Messages{% endblock %}
+
+{% block content %}
+
+<script>
+  function ajax(){
+
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function(){
+  if(req.readyState == 4 && req.status == 200)
+  {
+  document.getElementById('chats').innerHTML = req.responseText;
+  }
+  }
+  req.open('/chats', true);
+  req.send();
+  }
+  setInterval(function(){ajax()}, 10);
+</script>
+
+<br>
+<h4><i class="fas fa-chat" onload="ajax();"></i> Chat with connections</h4>
+
+<div class="content">
+   
+        <ul class="list-group-flash list-group-flush">
+            {% for approved in approved_sent_connections %}
+                    <li class="list-group-item alumnus">
+                      <a href=""> 
+                        {% if approved.avatar == None %}
+                                <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="60" height="43">
+                        {% else %}
+                                <img src="{{ approved.avatar }}" 
+                            class="rounded-circle" width="60" height="43">
+                        {% endif %}
+                        {{ approved.fullname }} 
+                      </a>
+
+                        {% if approved.online == "1" %}
+                            <span style="height: 12px;width: 12px;background-color: #1fc124;border-radius: 6px;
+                            float: right;margin-top: 15px;"></span>
+                        {% else %}
+                            <span style="height: 12px;width: 12px;background-color: #8a8a8a;border-radius: 6px;
+                            float: right;margin-top: 15px;"></span>
+                        {% endif %}
+                    </li>
+            {% endfor %}
+
+            {% for approved in approved_request_connections %}
+                    <li class="list-group-item alumnus">
+                      <a href=""> 
+                        {% if approved.avatar == None %}
+                                <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="60" height="43">
+                        {% else %}
+                                <img src="{{ approved.avatar }}" 
+                            class="rounded-circle" width="60" height="43">
+                        {% endif %}
+                        {{ approved.fullname }}
+                      </a>
+                        {% if approved.online == "1" %}
+                            <span style="height: 12px;width: 12px;background-color: #1fc124;border-radius: 6px;
+                            float: right;margin-top: 5px;"></span>
+                        {% else %}
+                            <span style="height: 12px;width: 12px;background-color: #8a8a8a;border-radius: 6px;
+                            float: right;margin-top: 15px;"></span>
+                        {% endif %}
+                    </li>
+           {% endfor %}
+        </ul>
+
+</div> 
+
+
+  </div>
+
+  <br>
+{% endblock %}

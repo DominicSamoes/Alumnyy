@@ -12,13 +12,15 @@
   <ul class="list-group list-group-flush" id="text">
               <br> 
               <li class="list-group-item alumnus"> 
+                            <a href="/connectprofile?id={{ approved.connecta }}">
                             {% if approved.avatar == None %}
-                                <a href="/connectprofile?id={{ approved.connecta }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
-                                  class="rounded-circle" width="60" height="43"></a> <a href="/connectprofile?id={{ approved.connecta}}">{{ approved.fullname }}</a>
+                                <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="60" height="43">
                             {% else %}
-                                <a href="/connectprofile?id={{ approved.connecta }}"><img src="{{ approved.avatar }}" 
-                            class="rounded-circle" width="60" height="43"></a> <a href="/connectprofile?id={{ approved.connecta }}">{{ approved.fullname }}</a>
+                                <img src="{{ approved.avatar }}" 
+                            class="rounded-circle" width="60" height="43">
                             {% endif %}
+                            {{ approved.fullname }}</a>
                   <br> 
               </li>
               <br>
@@ -29,13 +31,15 @@
   <ul class="list-group list-group-flush" id="text">
             <br> 
             <li class="list-group-item alumnus"> 
-                          {% if approved.avatar == None %}
-                              <a href="/connectprofile?id={{ approved.connectb }}"><img src="{{ url_for('static', filename='assets/default.png') }}" 
-                                class="rounded-circle" width="60" height="43"></a> <a href="/connectprofile?id={{ approved.connectb}}">{{ approved.fullname }}</a>
-                          {% else %}
-                              <a href="/connectprofile?id={{ approved.connectb }}"><img src="{{ approved.avatar }}" 
-                          class="rounded-circle" width="60" height="43"></a> <a href="/connectprofile?id={{ approved.connectb }}">{{ approved.fullname }}</a>
-                          {% endif %}
+                            <a href="/connectprofile?id={{ approved.connectb }}">
+                            {% if approved.avatar == None %}
+                                <img src="{{ url_for('static', filename='assets/default.png') }}" 
+                                  class="rounded-circle" width="60" height="43">
+                            {% else %}
+                                <img src="{{ approved.avatar }}" 
+                                  class="rounded-circle" width="60" height="43">
+                            {% endif %}
+                            {{ approved.fullname }}</a>
             </li>
             <br> 
 </ul>

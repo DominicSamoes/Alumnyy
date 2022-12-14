@@ -4,11 +4,7 @@ from .models import user as User, post as Post, connect as Connect, approvedconn
 from  sqlalchemy.sql.expression import func
 from werkzeug.utils import secure_filename
 import os
-from flask_mysqldb import MySQL, MySQLdb
-from wtforms import Form, StringField, validators
-import urllib.request
 from . import *
-from sqlalchemy import update
 
 views = Blueprint('views', __name__)
 
@@ -200,21 +196,12 @@ def upload():
             return redirect(url_for("views.my_profile"))
         else:
             flash("Something went wrong please try again and make sure image is a jpg, jpeg, png, or gif")
-            return redirect(url_for("views.my_profile"))
+            return redirect(url_for("views.my_profile"))     
 
-class MessageForm(Form):   
-    """Create Message Form"""
-    body = StringField('', [validators.length(min=1)], render_kw={'autofocus': True})       
-
-@views.route('/chat/<string:id>', methods=['GET', 'POST'])
+@views.route('/chats')
 @login_required 
-def chat(id):
-    """Sends message to fellow alumnus"""
-    form = MessageForm(request.form)
-    if request.method == 'POST' and form.validate():
-        messages = form.body.data
-        db.session.execute("INSERT INTO chat(text, msg_from, msg_to) VALUES(%s, %s, %s)", (messages, current_user.id, id))
-        db.session.commit()
+def chats():
+    """Messages sent to or received from fellow alumni"""
 
     # Get connections
     approved_sent_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON\
@@ -222,13 +209,5 @@ def chat(id):
     approved_request_connections = db.session.execute('SELECT * FROM user INNER JOIN approvedconnection ON\
          user.id = approvedconnection.connecta WHERE approvedconnection.connectb = :val', {'val': current_user.id})
 
-    return render_template("chat.html", approved_sent_connections=approved_sent_connections,\
-         approved_request_connections=approved_request_connections, form=form)
-
-@views.route('/chats', methods=['GET', 'POST'])
-def chats():
-   id = request.args.get('id') 
-   chats = db.session.execute("SELECT * FROM chat WHERE (msg_by=%s AND msg_to=%s) OR (msg_by=%s AND msg_to=%s) "
-                    "ORDER BY id ASC", (current_user.id, id, id, current_user.id))
-   alumnus = db.session.execute('SELECT * FROM user WHERE id = :val', {'val': id}) 
-   return render_template('chats.html', chats=chats, alumnus=alumnus)
+    return render_template("chats.html", approved_sent_connections=approved_sent_connections,\
+         approved_request_connections=approved_request_connections)
