@@ -62,19 +62,3 @@ class approvedconnection(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     connecta = db.Column(db.Integer, db.ForeignKey('user.id'))
     connectb = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-class chat(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    text = db.Column(db.String(1000))
-    msg_from = db.Column(db.Integer, db.ForeignKey('user.id'))
-    msg_to = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __init__(self, text, msg_from, msg_to):
-        self.date = datetime.datetime.now()
-        self.text = text
-        self.msg_from = msg_from
-        self.msg_to = msg_to
-
-    def __repr__(self):
-        return '<Chat %r>' % self.id

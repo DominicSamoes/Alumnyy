@@ -93,7 +93,7 @@ def connection_approval():
         Connect.query.filter(Connect.initid == approve).delete()
         db.session.commit()
         flash('Connection approved!', category='success')
-        return redirect(url_for('views.pendingapproval'))
+        return redirect(url_for('views.connection_approval'))
 
 @views.route('/declinereq', methods=['GET'])
 @login_required
@@ -105,7 +105,7 @@ def connection_sent_decline():
         Connect.query.filter(Connect.recid == decline).delete()
         db.session.commit()
         flash('Connection request removed!', category='success')
-        return redirect(url_for('views.pendingrequest'))
+        return redirect(url_for('views.connection_request'))
 
 @views.route('/decline', methods=['GET'])
 @login_required
